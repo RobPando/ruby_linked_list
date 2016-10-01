@@ -50,6 +50,10 @@ class LinkedList
 			tail
 
 		when '5'
+			if @head.nil?
+				puts "List is empty..."
+				run
+			end
 			begin
 			print "Type the index number: "
 			indx = Integer(gets) rescue nil
@@ -59,7 +63,15 @@ class LinkedList
 
 		when '6'
 			puts "Deleting last element..." unless @head.nil?
-			pop
+			if @size == 1
+				@head = nil
+				@tail = nil
+				@size = 0
+				puts "There are no more elements in the list."
+				run
+			else
+				pop
+			end
 
 		when '7'
 			print "Type the element to check: "
@@ -150,7 +162,6 @@ class LinkedList
 
 	def at(index) #Value/data at a given index
 		puts "The index is larger then the size of the list: #{@size}" if index >= @size
-		puts "List is empty..." if @head.nil?
 		puts "The value in the last index is: #{@tail.value}" if index < 0
 		puts "Value at index #{index}: #{@head.value}" if index == 0
 		counter = 0
