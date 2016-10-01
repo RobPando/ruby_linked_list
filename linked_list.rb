@@ -1,15 +1,15 @@
 
 class LinkedList
 	attr_accessor :head, :tail
-	
-	def initialize
+
+	def initialize 
 		@head = nil
 		@tail = nil
-		@size = 0
+		@size = 0 #to keep track of the size of the list.
 		run
 	end
 
-	def run
+	def run #User Prompt
 		@node_value = @head
 		puts "Options:"
 		puts "0. Append to the list."
@@ -30,20 +30,25 @@ class LinkedList
 		perform(task)
 	end
 
-	def perform(task)
+	def perform(task) #Call THE method according to the desired task.
 		case task
 		when '0'
 			value = node_entry
 			append(value)
+
 		when '1'
 			value = node_entry
 			prepend(value)
+
 		when '2'
 			size
+
 		when '3'
 			head
+
 		when '4'
 			tail
+
 		when '5'
 			begin
 			print "Type the index number: "
@@ -51,19 +56,24 @@ class LinkedList
 			puts "Input must be numeric..." if indx.nil?
 			end while indx.nil?
 			at(indx)
+
 		when '6'
 			puts "Deleting last element..." unless @head.nil?
 			pop
+
 		when '7'
 			print "Type the element to check: "
 			val = gets.strip
 			contains?(val)
+
 		when '8'
 			print "Type the value you are looking for: "
 			data = gets.strip
 			find(data)
+
 		when '9'
 			to_console
+
 		when 'put'
 			value = node_entry
 			begin
@@ -75,12 +85,14 @@ class LinkedList
 				run
 			end
 			insert_at(value, index)
+
 		when 'del'
 			begin
 				print "Type the index of the value to be deleted: "
 				index = Integer(gets) rescue nil
 			end while index.nil?
 			remove_at(index)
+
 		when 'e'
 			exit
 		else
@@ -88,12 +100,14 @@ class LinkedList
 			run
 		end
 	end
-	def node_entry
+
+	def node_entry #Creates new element/node to be added.
 		print "Type the data to store: "
 		data = gets.strip
 		node = Node.new(data)
 		return node
 	end
+
 	def append(node)
 		if @head.nil?
 			@head = node
@@ -124,17 +138,17 @@ class LinkedList
 		run
 	end
 
-	def head
-		puts "#{@head.value}"
+	def head 
+		puts "Head data: #{@head.value}"
 		run
 	end
 
 	def tail
-		puts "#{@tail.value}"
+		puts "Tail data: #{@tail.value}"
 		run
 	end
 
-	def at(index)
+	def at(index) #Value/data at a given index
 		puts "The index is larger then the size of the list: #{@size}" if index >= @size
 		puts "List is empty..." if @head.nil?
 		puts "The value in the last index is: #{@tail.value}" if index < 0
@@ -151,7 +165,7 @@ class LinkedList
 		run
 	end
 
-	def pop
+	def pop #delete last element
 		if @head.nil?
 			puts "List is empty..."
 		elsif @tail.nil?
@@ -179,7 +193,7 @@ class LinkedList
 		run
 	end
 
-	def find(data)
+	def find(data) #Outputs the index of a given value/data
 		index = 0
 		until @node_value.next_node.nil?
 			break if @node_value.value == data
@@ -191,7 +205,7 @@ class LinkedList
 		run
 	end
 
-	def to_console
+	def to_console #Displays the list
 		if @head.nil?
 			puts "List is empty..."
 			run
